@@ -1,0 +1,46 @@
+﻿@model List<JogoViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Listagem de Jogos</h1>
+<table class="table table-responsive table-striped">
+    <tr>
+        <th>Id</th>
+        <th>Descrição</th>
+        <th>Categoria</th>
+        <th>Data de aquisição</th>
+        <th>Valor de locação</th>
+    </tr>
+
+    @foreach (JogoViewModel jogo in Model)
+    {
+        <tr>
+            <td>
+                <a href="/jogo/Edit?id=@jogo.Id" class="btn btn-info">Editar</a>
+                <a href="javascript:apagarJogo(@jogo.Id)" class="btn btn-danger">Apagar</a>
+            </td>            
+            <td>@jogo.Id</td>
+            <td>@jogo.Descricao</td>
+            <td>@jogo.CategoriaId</td>
+            <td>@jogo.DataAquisicao.ToShortDateString()</td>
+            <td>@jogo.ValorLocacao?.ToString("0.00")</td>
+        </tr>
+    }
+</table>
+
+<h2>Cadastro de Jogos</h2>
+<a href="/jogo/create">Novo Registro</a>
+<br />
+
+<table class="table table-responsive"></table>
+
+<script>
+    function apagarAluno (id) {
+        if (confirm('Confirma a exclusão do registro?'))
+            location.href = 'aluno/Delete?id=' + id;
+    }
+</script>
+
+
+
